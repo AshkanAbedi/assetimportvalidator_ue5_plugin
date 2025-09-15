@@ -1,0 +1,3 @@
+ & "C:\Unreal\Engine\UE_5.6\Engine\Binaries\Win64\UnrealEditor.exe" "C:\Unreal\Projects\assetimportvalidator_ue5_plugin\assetvalidate_plugin.uproject" -run=pythonscript -script="C:\Unreal\Projects\assetimportvalidator_ue5_plugin\Content\Python\CI_AssetValidator.py" -nullrhi -unattended -stdout -NoLogTimes
+ 
+ 
