@@ -9,12 +9,9 @@ stages:
 validate-textures:
   stage: validate
   image: adamrehn/ue5-full:5.6
-  tags:
-    - docker
-    - linux
   script:
     - echo "Running UE validation..."
-    - ue4cli configure --project=C:\Unreal\Projects\assetimportvalidator_ue5_plugin\assetvalidate_plugin.uproject
+    - ue4cli configure --project=$CI_PROJECT_DIR/assetvalidate_plugin.uproject
     - UnrealEditor assetvalidate_plugin.uproject -run=pythonscript -script="Content/Python/CI_AssetValidator.py" -nullrhi -unattended -stdout -NoLogTimes -log
   artifacts:
     paths:
