@@ -14,7 +14,7 @@ validate-textures:
     - linux
   script:
     - echo "Running UE validation..."
-    - ue4cli configure --project=C:\Unreal\Projects\assetimportvalidator_ue5_plugin\assetvalidate_plugin.uproject  # Sets up paths (ue4cli is in the image)
+    - ue4cli configure --project=C:\Unreal\Projects\assetimportvalidator_ue5_plugin\assetvalidate_plugin.uproject
     - UnrealEditor assetvalidate_plugin.uproject -run=pythonscript -script="Content/Python/CI_AssetValidator.py" -nullrhi -unattended -stdout -NoLogTimes -log
   artifacts:
     paths:
