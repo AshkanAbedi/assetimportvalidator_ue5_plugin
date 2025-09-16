@@ -11,6 +11,15 @@
 			"AdditionalDependencies": [
 				"CoreUObject"
 			]
+		},
+		{
+			"Name": "AssetValidator",
+			"Type": "Editor",
+			"LoadingPhase": "PostEngineInit",
+			"AdditionalDependencies": [
+				"Engine",
+				"DataValidation"
+			]
 		}
 	],
 	"Plugins": [
