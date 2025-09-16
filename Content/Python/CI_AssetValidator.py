@@ -9,14 +9,12 @@ def validate_texture(factory, created_object):
     asset_name = created_object.get_name()
     asset_path = created_object.get_path_name()
 
-    # Check name prefix
     if not asset_name.startswith("T_"):
         error_msg = f"Validation failed: '{asset_name}' does not start with 'T_'."
         unreal.log_error(error_msg)
         unreal.EditorAssetLibrary.delete_asset(asset_path)
         sys.exit(1)  # Fail CI
 
-    # Check resolution
     width = created_object.get_size_x()
     height = created_object.get_size_y()
     if width != 1024 or height != 1024:
@@ -27,20 +25,18 @@ def validate_texture(factory, created_object):
 
     unreal.log(f"Validation passed for '{asset_name}'.")
 
-# Bind the delegate
 import_subsystem = unreal.get_editor_subsystem(unreal.ImportSubsystem)
 import_subsystem.on_asset_post_import.add_callable(validate_texture)
 
-# Import assets from a folder (e.g., for CI testing)
 asset_tools = unreal.AssetToolsHelpers.get_asset_tools()
-import_folder = unreal.Paths.project_content_dir() + "RawAssets/"  # Adjust to your test assets path
+import_folder = unreal.Paths.project_content_dir() + "RawAssets/"
 if os.path.exists(import_folder):
     for file in os.listdir(import_folder):
-        if file.lower().endswith(('.png', '.jpg', '.tga')):  # Target texture files
+        if file.lower().endswith(('.png', '.jpg', '.tga')):
             full_path = os.path.join(import_folder, file).replace('\\', '/')
             task = unreal.AssetImportTask()
             task.set_editor_property('filename', full_path)
-            task.set_editor_property('destination_path', '/Game/Textures')  # Import destination
+            task.set_editor_property('destination_path', '/Game/Textures')
             task.set_editor_property('save', True)
             task.set_editor_property('automated', True)
             asset_tools.import_asset_tasks([task])
